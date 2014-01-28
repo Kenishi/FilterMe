@@ -2,6 +2,20 @@ GenderMe - Python 2.7x
 
 A small Python tool which tries to gather user information on users in Mixi groups for parsing and searching.
 
+HOW TO USE:
+1) Get a Mixi account
+2) Run GenderMe.py first. Login.
+3) When asked for group ID, you can find this in the URL for the group, it's the string of numbers after id=
+4) Let the script run till complete or till you get tired. Simply close the console screen.
+Note: I have left a lot of the debug loggin in so its easy to see whats going on.
+5) Run GenderMeGUI.py
+The input box will search the Intro text for that text.
+The check box Female/Male/None (left to right respectively), allow you to filter for the gender.
+Press search to get results from the DB.
+
+Note: You can NOT run the Gatherer and search the database at the same time.
+
+
 LEARNING GOALS: None
 
 PROBLEM: Mixi.jp is a Japanese SNS site much like Facebook. In recent years Facebook has eclipsed the service. One of the nice things about the site though is that it still remains a good place for people of common interests to gather and talk about things they like. Mixi has avoided allowing people to really use the service to find people of similar interests to meet up. As a result, there lacks options such as "Find people that like X and are of gender F." This small script attempted to tackle the problem.
@@ -16,7 +30,7 @@ Known Issues:
 * Flood detection problems - Mixi will temporarily block accessing the site if it detects excessive hits from your IP. Attempts to jitter accesses and add in sleep times have not fixed this issue.
 
 Things To-Do:
+* Centralize into a single application so that the scripts are not split
 * Clean up code to better match my current standard for written code and layout.
 * Clean up the GUI
 * Create tests to help discover edge cases in parsing
-* Add in filtering option for searching for Male gender (haha)

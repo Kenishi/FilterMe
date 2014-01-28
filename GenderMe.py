@@ -101,8 +101,6 @@ class ParseUser(threading.Thread):
 							sys.exit(1)
 						elif x.th.contents[0] == u'性別':
 							import_data['sex'] = x.td.decode_contents().strip()
-							if import_data['sex'] == u'男性': # Don't need male users
-								break
 						elif x.th.contents[0] == u'年齢':
 							import_data['age'] = x.td.decode_contents()
 						elif x.th.contents[0] == u'現住所':
@@ -114,15 +112,11 @@ class ParseUser(threading.Thread):
 					## Continue on only if its not a guy
 					## Grab the name if sex is F or non-specified
 					
-					if import_data['sex'] == u'女性' or import_data['sex'] == "?":
-						import_data['name'] = soup.title.contents[0].string.strip('[mixi] ')
-				
-						## Dump to DB now
-						cur.execute('''INSERT INTO users(user_id,name,age,sex,location,intro) VALUES(?,?,?,?,?,?)''',(user,import_data['name'],import_data['age'],import_data['sex'],import_data['location'],import_data['intro']))
-						conn.commit()
-					else:
-						cur.execute('''INSERT INTO users(user_id,sex) VALUES(?,?)''', (user,import_data['sex']))
-						conn.commit()
+					import_data['name'] = soup.title.contents[0].string.strip('[mixi] ')
+			
+					## Dump to DB now
+					cur.execute('''INSERT INTO users(user_id,name,age,sex,location,intro) VALUES(?,?,?,?,?,?)''',(user,import_data['name'],import_data['age'],import_data['sex'],import_data['location'],import_data['intro']))
+					conn.commit()
 				if count < SLEEP_INTERVAL:
 					count += 1
 					jitter = random.randint(JITTER_MIN,JITTER_MAX) / 1000.0
@@ -210,9 +204,10 @@ def login():
 	print "Login Complete"
 
 def getGroupID():
-	global group_id
+	global group_url
 	
 	group_id = raw_input("Input group id to parse for users (This is the number after ?id= in the group's URL:")
+	group_url += group_id
 
 try:
 	login()

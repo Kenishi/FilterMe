@@ -64,6 +64,7 @@ class GenderMeTable(QTableWidget):
 
 class GenderMeGUI(QMainWindow):
 	SQL_DB = "users.sqlite"
+	MALE = u'\"男性\"'
 	FEMALE = u'\"女性\"'
 	NONE = u'\"?\"'
 	data_list = QStandardItemModel()
@@ -114,7 +115,8 @@ class GenderMeGUI(QMainWindow):
 		flag = []
 		txt = self.search_txt.text().__str__().strip()
 		if self.check_f.checkState(): flag.append(self.FEMALE)
-		if self.check_n.checkState(): flag.append(self.NONE)
+		if self.check_m.checkState(): flag.append(self.MALE)
+		if self.check_n.checkState(): flag.append(self.NONE)		
 		self.search(txt,flag)
 		
 
@@ -131,15 +133,18 @@ class GenderMeGUI(QMainWindow):
 		self.search_txt = txt = QLineEdit()
 		searchLayout.addWidget(txt,0,0)
 		
-		self.check_f = cf = QCheckBox(text="F")
+		self.check_f = cf = QCheckBox(text=u"女")
 		cf.setCheckState(Qt.Checked)
 		searchLayout.addWidget(cf,0,1)
 		
-		self.check_n = cn = QCheckBox(text="N")
-		searchLayout.addWidget(cn,0,2)
+		self.check_m = cm = QCheckBox(text=u"男")
+		searchLayout.addWidget(cm,0,2)
+		
+		self.check_n = cn = QCheckBox(text=u"無")
+		searchLayout.addWidget(cn,0,3)
 		
 		self.search_btn = btn_s = QPushButton(text="Search")
-		searchLayout.addWidget(btn_s,0,3)
+		searchLayout.addWidget(btn_s,0,4)
 		self.connect(btn_s, SIGNAL("pressed()"),self.signal_doSearch)
 
 		## WebPage View
@@ -161,7 +166,7 @@ class GenderMeGUI(QMainWindow):
 		tw.setWebView(self.webview)
 		tw.setSortingEnabled(True)
 		self.connect(tw, SIGNAL("cellDoubleClicked(int,int)"), tw.openURL)
-		searchLayout.addWidget(tw,1,0,1,4)
+		searchLayout.addWidget(tw,1,0,1,5)
 		
 		mainLayout.addLayout(searchLayout)
 		
