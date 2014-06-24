@@ -1,6 +1,9 @@
-GenderMe - Python 2.7x
+# GenderMe
+## A small Python tool which tries to gather and filter user information on users in Mixi groups to make it easier to find people with common interests.
 
-A small Python tool which tries to gather user information on users in Mixi groups for parsing and searching.
+Requirements:
+Python 2.7x
+PyQt 4.8
 
 HOW TO USE:
 1) Get a Mixi account
