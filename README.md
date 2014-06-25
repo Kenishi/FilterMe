@@ -1,4 +1,4 @@
-# GenderMe
+# FilterMe
 ## A small Python tool which tries to gather and filter users in Mixi groups to make it easier to find people with common interests.
 
 ###Requirements:
